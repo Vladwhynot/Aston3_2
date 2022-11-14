@@ -5,6 +5,7 @@ import static android.widget.Toast.LENGTH_SHORT;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +30,7 @@ public class MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.editText);
         editText.setOnKeyListener(new EditText.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER)) {
-                    Piccaso();
-                    return true;
-                }
+                Piccaso();
                 return false;
             }
         });
@@ -51,11 +47,16 @@ public class MainActivity extends AppCompatActivity {
                  .into(imageView, new Callback() {
                      @Override
                      public void onSuccess() {
+                         Toast toast = Toast.makeText(getApplicationContext(), "image uploaded", LENGTH_SHORT);
+                         toast.setGravity(Gravity.CENTER, 0, 0);
+                         toast.show();
                      }
 
                      @Override
                      public void onError() {
-                         Toast.makeText(getApplicationContext(), "Error!", LENGTH_SHORT).show();
+                         Toast toast = Toast.makeText(getApplicationContext(), "Error!", LENGTH_SHORT);
+                         toast.setGravity(Gravity.CENTER, 0, 0);
+                         toast.show();
                      }
                  });
      }
